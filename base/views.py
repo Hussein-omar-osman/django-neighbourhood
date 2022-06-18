@@ -76,3 +76,41 @@ def neighbour(request):
    businesses = Business.objects.filter(neighbourHood=neighbour)
    context = {'posts':posts, 'businesses':businesses}
    return render(request, 'neighbourhood.html', context)
+
+@login_required(login_url='loginPage')
+def accountSettings(request):
+  
+    if request.method == 'POST':
+      username = request.POST.get('username').lower()
+      bio = request.POST.get('bio')
+      neighboor = request.POST.get('neighboor')
+      contact = request.POST.get('contact')
+      image = request.FILES.get('image')
+      print(username, bio, image, neighboor, contact)
+
+      if User.objects.filter(username=username).exists():
+          messages.info(request, 'Username is taken')
+          return redirect('accountSettings')
+      elif neighboor == 'no':
+          messages.info(request, 'Select NeighbourHood')
+          return redirect('accountSettings')
+      else:
+        print('you can now save')
+        user = request.user
+        if image != None:
+          user.username = username
+          user.bio = bio
+          user.contact = contact
+          user.neighboorhood = neighboor
+          user.image = image
+          user.save()
+        else:
+          user.username = username
+          user.bio = bio
+          user.contact = contact
+          user.neighboorhood = neighboor
+          user.save()
+        return redirect('accountSettings')
+          
+      
+    return render (request, 'account_settings.html')
