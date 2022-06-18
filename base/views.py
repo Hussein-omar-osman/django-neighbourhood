@@ -60,18 +60,7 @@ def registerPage(request):
            user = User.objects.create_user(username=request.POST['username'], email=request.POST['email'], password=request.POST['password1'], neighboorhood=request.POST['neighboor'])
            user.save()
            login(request, user)
-           return redirect('home')
-         #   form = MyCreateUserForm(request.POST)
-         #   if form.is_valid():
-         #       user = form.save(commit=False)
-         #       user.username = user.username.lower()
-         #       user.email = user.email.lower()
-         #       user.save()
-         #       login(request, user)
-         #       return redirect('home')       
-         #   else:
-         #     messages.error(request, 'An error ocurred during registration.')
-          
+           return redirect('neighbour')
    return render(request, 'register.html', context)
 
 def logoutUser(request):
