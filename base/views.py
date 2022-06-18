@@ -12,38 +12,33 @@ def home(request):
    return render(request, 'landing.html')
   
   
+# def loginPage(request):
+#    if request.method == 'POST':
+#      print(request.POST)
+#    return render(request, 'login.html')
+
 def loginPage(request):
+   if request.user.is_authenticated:
+     return redirect('home')
    if request.method == 'POST':
-     print(request.POST)
+     email = request.POST['email'].lower()
+     password = request.POST['password']
+     print(email)
+     print(password)
+     try:
+         user = User.objects.get(email=email)
+     except:
+         messages.error(request, 'User not exist.')
+         
+     user = authenticate(request, email=email, password=password)
+     if user:
+         login(request, user)
+         
+         return redirect('home')
+     else:
+         messages.error(request, 'Email or password incorrect.')
    return render(request, 'login.html')
   
-# def registerPage(request):
-#    if request.method == 'POST':
-#       username = request.POST.get('username').lower()
-#       email = request.POST.get('email').lower()
-#       neighboor = request.POST.get('neighboor')
-#       password = request.POST.get('password1')
-#       password2 = request.POST.get('password2')
-#       print(username, email, neighboor, password, password2)
-#       if User.objects.filter(username=username).exists():
-#          messages.info(request, 'Username is taken')
-#          return redirect('registerPage')
-#       elif User.objects.filter(email=request.POST['email']).exists():
-#          messages.info(request, 'Email is taken')
-#          return redirect('registerPage')
-#       elif request.POST['password1'] != request.POST['password2']:
-#          messages.info(request, 'Password and Confirm Paswword dont match')
-#          return redirect('registerPage')
-#       else:
-#          print('creating user')
-#             # user = User.objects.create_user
-#             # user.username = user.username.lower()
-#             # user.email = user.email.lower()
-#             # user.save()
-#             # return redirect('home')       
-#          # else:
-#          #    messages.error(request, 'An error ocurred during registration.')
-#    return render(request, 'signup.html')
 
 def registerPage(request):
    if request.user.is_authenticated:
