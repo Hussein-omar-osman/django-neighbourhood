@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from base.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 
 # Create your views here.
@@ -44,8 +46,8 @@ def loginPage(request):
 #    return render(request, 'signup.html')
 
 def registerPage(request):
-   # if request.user.is_authenticated:
-   #     return redirect('home')
+   if request.user.is_authenticated:
+       return redirect('home')
    
    context = {'form':'form'}
    if request.method == 'POST':
@@ -69,6 +71,7 @@ def registerPage(request):
            print(request.POST)
            user = User.objects.create_user(username=request.POST['username'], email=request.POST['email'], password=request.POST['password1'], neighboorhood=request.POST['neighboor'])
            user.save()
+           login(request, user)
            return redirect('home')
          #   form = MyCreateUserForm(request.POST)
          #   if form.is_valid():
@@ -82,3 +85,7 @@ def registerPage(request):
          #     messages.error(request, 'An error ocurred during registration.')
           
    return render(request, 'register.html', context)
+
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
