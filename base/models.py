@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from cloudinary.models import CloudinaryField
-import uuid
 
 
 # Create your models here.
@@ -13,3 +12,14 @@ class User(AbstractUser):
    contact = models.CharField(max_length=100 ,blank=True, null=True)
    USERNAME_FIELD = 'email'
    REQUIRED_FIELDS = ['username']
+   
+   
+class NeighbourHood(models.Model):
+    name = models.CharField(max_length=200)
+    location = models.CharField(max_length=200)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+      ordering = ['-created']
+    def __str__(self):
+        return self.name
