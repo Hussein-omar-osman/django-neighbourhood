@@ -82,5 +82,6 @@ def logoutUser(request):
 def neighbour(request):
    neighbour = NeighbourHood.objects.get(name=request.user.neighboorhood)
    posts = Post.objects.filter(neighbourHood=neighbour)
-   context = {'posts':posts}
+   businesses = Business.objects.filter(neighbourHood=neighbour)
+   context = {'posts':posts, 'businesses':businesses}
    return render(request, 'neighbourhood.html', context)
