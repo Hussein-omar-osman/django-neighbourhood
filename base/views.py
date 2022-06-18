@@ -8,7 +8,6 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 def home(request):
-
    return render(request, 'landing.html')
   
 def loginPage(request):
@@ -28,7 +27,7 @@ def loginPage(request):
      if user:
          login(request, user)
          
-         return redirect('home')
+         return redirect('neighbour')
      else:
          messages.error(request, 'Email or password incorrect.')
    return render(request, 'login.html')
@@ -78,3 +77,8 @@ def registerPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('home')
+ 
+@login_required(login_url='loginPage')
+def neighbour(request):
+   
+   return render(request, 'neighbourhood.html')
