@@ -8,9 +8,11 @@ def home(request):
   
   
 def loginPage(request):
-
+   if request.method == 'POST':
+     print(request.POST)
    return render(request, 'login.html')
   
 def signupPage(request):
-
+   if request.method == 'POST':
+     print(request.POST)
    return render(request, 'signup.html')
