@@ -3,9 +3,10 @@
 
 <main class="container">
  <div style="margin-top: 50px;">
-  <h1>{{request.user.neighboorhood}}.
-   <small style="font-size: 20px; color: #5c8fff; cursor: pointer;">
-    <a href=""><i class="fa fa-external-link" aria-hidden="true"></i></a>
+  <h1 style="text-align: center;">{{request.user.neighboorhood}}.
+   <small data-bs-toggle="modal" data-bs-target="#exampleModal"
+    style="font-size: 20px; color: #5c8fff; cursor: pointer;">
+    <i class="fa fa-external-link" aria-hidden="true"></i>
    </small>
   </h1>
  </div>
@@ -61,4 +62,27 @@
 
  </div>
 </main>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <h5 class="modal-title" style="text-align: center;" id="exampleModalLabel">{{request.user.neighboorhood}}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+   </div>
+   <div class="modal-body">
+
+    <p>Loaction : {{neighbour.location}}</p>
+    <p>Members : {{members}}</p>
+    <p>Health Department : +254768454358</p>
+    <p>Police Department : +254789567457</p>
+
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+   </div>
+  </div>
+ </div>
+</div>
 {% endblock content %}

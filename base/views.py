@@ -74,7 +74,8 @@ def neighbour(request):
    neighbour = NeighbourHood.objects.get(name=request.user.neighboorhood)
    posts = Post.objects.filter(neighbourHood=neighbour)
    businesses = Business.objects.filter(neighbourHood=neighbour)
-   context = {'posts':posts, 'businesses':businesses}
+   members = len(User.objects.filter(neighboorhood=request.user.neighboorhood))
+   context = {'posts':posts, 'businesses':businesses, 'members':members, 'neighbour':neighbour}
    return render(request, 'neighbourhood.html', context)
 
 @login_required(login_url='loginPage')
