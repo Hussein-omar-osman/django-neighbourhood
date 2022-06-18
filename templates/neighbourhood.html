@@ -10,39 +10,23 @@
   </h1>
  </div>
  <h2>Latest Posts</h2>
+
+ {% for post in posts %}
+
  <div style="display: flex; max-width: 900px; gap: 10px;">
   <div>
-   <img src="{{request.user.image.url}}" alt=""
-    style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+   <img src="{{post.user.image.url}}" alt="" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
   </div>
   <div>
-   <h5>@name</h5>
-   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa omnis commodi laborum nobis est aspernatur
-    blanditiis excepturi iste, dolores officia.</p>
+   <h5>@{{post.user.username}}</h5>
+   <p>{{post.body}}</p>
   </div>
  </div>
- <div style="display: flex; max-width: 800px; gap: 10px;">
-  <div>
-   <img src="{{request.user.image.url}}" alt=""
-    style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
-  </div>
-  <div>
-   <h5>@name</h5>
-   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa omnis commodi laborum nobis est aspernatur
-    blanditiis excepturi iste, dolores officia.</p>
-  </div>
- </div>
- <div style="display: flex; max-width: 800px; gap: 10px;">
-  <div>
-   <img src="{{request.user.image.url}}" alt=""
-    style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
-  </div>
-  <div>
-   <h5>@name</h5>
-   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa omnis commodi laborum nobis est aspernatur
-    blanditiis excepturi iste, dolores officia.</p>
-  </div>
- </div>
+ {% endfor %}
+
+
+
+
  <div class="row mb-2">
   <h2>Business Available</h2>
   <div class="col-md-6">

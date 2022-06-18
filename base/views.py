@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from base.models import User
+from base.models import User, Post, NeighbourHood, Business
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
@@ -80,5 +80,7 @@ def logoutUser(request):
  
 @login_required(login_url='loginPage')
 def neighbour(request):
-   
-   return render(request, 'neighbourhood.html')
+   neighbour = NeighbourHood.objects.get(name=request.user.neighboorhood)
+   posts = Post.objects.filter(neighbourHood=neighbour)
+   context = {'posts':posts}
+   return render(request, 'neighbourhood.html', context)

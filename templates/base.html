@@ -21,7 +21,7 @@
     <header
       class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom shadow p-3 mb-5 bg-body rounded">
       <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-        <svg class="bi me-2" width="80" height="80" role="img" xmlns="http://www.w3.org/2000/svg"
+        <svg class="bi me-2" width="90" height="90" role="img" xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 3187.5 840.3954326742254">
 
           <g transform="scale(9.375) translate(10, 10)">
@@ -56,9 +56,12 @@
               class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
+            <li><a class="dropdown-item" href="#">{{request.user.username}}</a></li>
+            <hr class="dropdown-divider">
+            <li><a class="dropdown-item" href="{% url 'neighbour' %}">NeighbourHood</a></li>
             <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#">Post</a></li>
+            <li><a class="dropdown-item" href="#">Business</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>

@@ -28,6 +28,7 @@ class Business(models.Model):
     name = models.CharField(max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = CloudinaryField('image')
+    body = models.TextField(null=True)
     contact = models.CharField(max_length=200)
     neighbourHood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
