@@ -45,11 +45,13 @@
       <div class="col-md-3 text-end">
         <!-- <button type="button" class="btn btn-outline-primary me-2">Login</button>
     <button type="button" class="btn btn-primary">Sign-up</button> -->
+        {% if request.user.is_authenticated %}
 
         <div class="dropdown" style="margin-right: 150px;">
           <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
             data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+            <img src="{{request.user.image.url}}" style="object-fit: cover;" alt="mdo" width="32" height="32"
+              class="rounded-circle">
           </a>
           <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
             <li><a class="dropdown-item" href="#">New project...</a></li>
@@ -58,9 +60,27 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
+            <li><a class="dropdown-item" href="{% url 'logout'%}">Log out</a></li>
           </ul>
         </div>
+        {% else %}
+        <div class="dropdown" style="margin-right: 150px;">
+          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://res.cloudinary.com/husseincloud/image/upload/v1654285390/hz7a08c74kynhnx24lwd.png"
+              alt="mdo" width="32" height="32" class="rounded-circle">
+          </a>
+          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+
+            <li><a class="dropdown-item" href="{% url 'login'%}">Log in</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="{% url 'register'%}">Sign up</a></li>
+          </ul>
+        </div>
+
+        {% endif %}
       </div>
     </header>
   </div>

@@ -11,12 +11,6 @@ def home(request):
 
    return render(request, 'landing.html')
   
-  
-# def loginPage(request):
-#    if request.method == 'POST':
-#      print(request.POST)
-#    return render(request, 'login.html')
-
 def loginPage(request):
    if request.user.is_authenticated:
      return redirect('home')
