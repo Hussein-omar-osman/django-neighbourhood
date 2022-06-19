@@ -115,3 +115,14 @@ def accountSettings(request):
           
       
     return render (request, 'account_settings.html')
+  
+
+@login_required(login_url='loginPage')
+def post(request):
+    if request.method == 'POST':
+      print(request.POST)
+      body = request.POST.get('body')
+      neighbour = NeighbourHood.objects.get(name=request.user.neighboorhood)
+      post = Post.objects.create(user=request.user, neighbourHood=neighbour, body=body)
+      return redirect('neighbour')
+    return render(request, 'post.html')
