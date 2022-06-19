@@ -10,7 +10,7 @@
    </small>
   </h1>
  </div>
- <h2 style="margin-top: 50px;">Latest Posts</h2>
+ <h2 style="margin-top: 50px; margin-bottom: 20px;">Latest Posts</h2>
 
  {% for post in posts %}
 
@@ -30,7 +30,7 @@
 
 
  <div class="row mb-2" style="margin-top: 80px;">
-  <h2>Business Available</h2>
+  <h2 style="margin-bottom: 20px;">Business NearBy</h2>
   {% for bizna in businesses %}
 
   <div class="col-md-6">
@@ -40,16 +40,11 @@
      <h3 class="mb-0">{{bizna.name}}</h3>
      <div class="mb-1 text-muted">{{bizna.created | date:"M d, Y"}}</div>
      <p class="card-text mb-auto">{{bizna.body}}.</p>
-     <!-- <a href="#" class="stretched-link">Continue reading</a> -->
      <span style="margin-top: 20px;">Contact:</span>
      <p style="color: blue;">{{bizna.contact}}</p>
     </div>
     <div class="col-auto d-none d-lg-block">
-     <!-- <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img"
-      aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-      <title>Placeholder</title>
-      <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-     </svg> -->
+
 
      <img src="{{bizna.image.url}}" alt="" width="350" height="300" style="object-fit: cover;">
 

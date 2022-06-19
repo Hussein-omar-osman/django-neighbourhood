@@ -16,7 +16,7 @@
 </head>
 
 <body>
-
+  {%load cloudinary%}
   <div class="container ">
     <header
       class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom shadow p-3 mb-5 bg-body rounded">
@@ -61,7 +61,7 @@
             <li><a class="dropdown-item" href="{% url 'neighbour' %}">NeighbourHood</a></li>
             <li><a class="dropdown-item" href="{% url 'accountSettings' %}">Settings</a></li>
             <li><a class="dropdown-item" href="{% url 'post' %}"><i class="fa fa-add"></i> Post</a></li>
-            <li><a class="dropdown-item" href="#">Business</a></li>
+            <li><a class="dropdown-item" href="{% url 'business' %}"><i class="fa fa-add"></i> Business</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>

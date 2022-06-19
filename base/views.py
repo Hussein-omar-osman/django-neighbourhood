@@ -10,7 +10,9 @@ from cloudinary.forms import cl_init_js_callbacks
 # Create your views here.
 
 def home(request):
-   return render(request, 'landing.html')
+  if request.user.is_authenticated:
+     return redirect('neighbour')
+  return render(request, 'landing.html')
   
 def loginPage(request):
    if request.user.is_authenticated:
@@ -124,5 +126,22 @@ def post(request):
       body = request.POST.get('body')
       neighbour = NeighbourHood.objects.get(name=request.user.neighboorhood)
       post = Post.objects.create(user=request.user, neighbourHood=neighbour, body=body)
+      post.save()
       return redirect('neighbour')
     return render(request, 'post.html')
+  
+  
+@login_required(login_url='loginPage')
+def business(request):
+    if request.method == 'POST':
+      
+      body = request.POST.get('body')
+      contact = request.POST.get('contact')
+      name = request.POST.get('name')
+      image = request.FILES.get('image')
+      print(body, contact, name, image)
+      neighbour = NeighbourHood.objects.get(name=request.user.neighboorhood)
+      business = Business.objects.create(user=request.user, neighbourHood=neighbour, body=body, name=name, image=image, contact=contact)
+      business.save()
+      return redirect('neighbour')
+    return render(request, 'business.html')
