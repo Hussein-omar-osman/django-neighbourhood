@@ -14,7 +14,7 @@ def home(request):
   
 def loginPage(request):
    if request.user.is_authenticated:
-     return redirect('home')
+     return redirect('neighbour')
    if request.method == 'POST':
      email = request.POST['email'].lower()
      password = request.POST['password']
@@ -37,7 +37,7 @@ def loginPage(request):
 
 def registerPage(request):
    if request.user.is_authenticated:
-       return redirect('home')
+       return redirect('neighbour')
    
    context = {'form':'form'}
    if request.method == 'POST':
