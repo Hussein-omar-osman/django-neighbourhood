@@ -151,7 +151,7 @@ def searchResults(request):
         q = request.POST.get('q')
         print(q)
         business = Business.objects.filter(Q(name__icontains=q))
-        context = {'title':'Awwwords - Search', 'q':q, 'business':business}
+        context = {'title':'Search results', 'q':q, 'business':business}
         return render(request, 'search_result.html', context)
    
    context = {'title':'Search results'}
