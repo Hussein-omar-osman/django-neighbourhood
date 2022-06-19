@@ -3,9 +3,8 @@ from django.contrib import messages
 from base.models import User, Post, NeighbourHood, Business
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
 from cloudinary.forms import cl_init_js_callbacks
-
-
 
 # Create your views here.
 
@@ -145,3 +144,15 @@ def business(request):
       business.save()
       return redirect('neighbour')
     return render(request, 'business.html')
+  
+  
+def searchResults(request):
+   if request.method == 'POST':
+        q = request.POST.get('q')
+        print(q)
+        business = Business.objects.filter(Q(name__icontains=q))
+        context = {'title':'Awwwords - Search', 'q':q, 'business':business}
+        return render(request, 'search_result.html', context)
+   
+   context = {'title':'Awwwords - Search'}
+   return render(request, 'search_result.html', context)

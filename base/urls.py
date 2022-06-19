@@ -10,4 +10,6 @@ urlpatterns = [
     path('accountSettings/', views.accountSettings, name='accountSettings'),
     path('post/', views.post, name='post'),
     path('business/', views.business, name='business'),
+    path('searchResults/', views.searchResults, name='searchResults'),
+
 ]
