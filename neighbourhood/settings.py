@@ -14,6 +14,7 @@ from pathlib import Path
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +29,7 @@ SECRET_KEY = 'django-insecure-r$#rv0ng*i0_!$bn5%(wqdk!v$57e8zaiap_lbo%#x#^bfjllw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['neighbourhood-web.herokuapp.com']
 
 
 # Application definition
@@ -81,11 +82,23 @@ WSGI_APPLICATION = 'neighbourhood.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+# Local
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+DATABASES={
+   'default':{
+      'ENGINE':'django.db.backends.postgresql_psycopg2',
+      'NAME':'d3oa4o605g1r0p',
+      'USER':'haqajsjpdqatne',
+      'PASSWORD':'af34aa9131443a4beae70b606f271a745417e673fb3b55a0bf72f9cd7b8e3c62',
+      'HOST':'ec2-3-224-8-189.compute-1.amazonaws.com',
+      'PORT':'5432',
+   }
 }
 
 
@@ -135,6 +148,8 @@ cloudinary.config(
   api_key = "587435562281821", 
   api_secret = "rtGxXIW3b97zR-u2GsWELp0YjVk" 
 )
+django_heroku.settings(locals())
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

@@ -11,7 +11,7 @@ from cloudinary.forms import cl_init_js_callbacks
 def home(request):
   if request.user.is_authenticated:
      return redirect('neighbour')
-  return render(request, 'landing.html')
+  return render(request, 'landing.html', {'title': 'Home'})
   
 def loginPage(request):
    if request.user.is_authenticated:
@@ -33,7 +33,7 @@ def loginPage(request):
          return redirect('neighbour')
      else:
          messages.error(request, 'Email or password incorrect.')
-   return render(request, 'login.html')
+   return render(request, 'login.html', {'title': 'login'})
   
 
 def registerPage(request):
@@ -64,7 +64,7 @@ def registerPage(request):
            user.save()
            login(request, user)
            return redirect('neighbour')
-   return render(request, 'register.html', context)
+   return render(request, 'register.html', {'title': 'Signup'})
 
 def logoutUser(request):
     logout(request)
@@ -76,7 +76,7 @@ def neighbour(request):
    posts = Post.objects.filter(neighbourHood=neighbour)
    businesses = Business.objects.filter(neighbourHood=neighbour)
    members = len(User.objects.filter(neighboorhood=request.user.neighboorhood))
-   context = {'posts':posts, 'businesses':businesses, 'members':members, 'neighbour':neighbour}
+   context = {'posts':posts, 'businesses':businesses, 'members':members, 'neighbour':neighbour, 'title':request.user.neighboorhood}
    return render(request, 'neighbourhood.html', context)
 
 @login_required(login_url='loginPage')
@@ -115,7 +115,7 @@ def accountSettings(request):
         return redirect('accountSettings')
           
       
-    return render (request, 'account_settings.html')
+    return render (request, 'account_settings.html', {'title':'Account'})
   
 
 @login_required(login_url='loginPage')
@@ -127,7 +127,7 @@ def post(request):
       post = Post.objects.create(user=request.user, neighbourHood=neighbour, body=body)
       post.save()
       return redirect('neighbour')
-    return render(request, 'post.html')
+    return render(request, 'post.html', {'title':'Add Post'})
   
   
 @login_required(login_url='loginPage')
@@ -143,7 +143,7 @@ def business(request):
       business = Business.objects.create(user=request.user, neighbourHood=neighbour, body=body, name=name, image=image, contact=contact)
       business.save()
       return redirect('neighbour')
-    return render(request, 'business.html')
+    return render(request, 'business.html', {'title':'Add Business'})
   
   
 def searchResults(request):
@@ -154,5 +154,5 @@ def searchResults(request):
         context = {'title':'Awwwords - Search', 'q':q, 'business':business}
         return render(request, 'search_result.html', context)
    
-   context = {'title':'Awwwords - Search'}
+   context = {'title':'Search results'}
    return render(request, 'search_result.html', context)
